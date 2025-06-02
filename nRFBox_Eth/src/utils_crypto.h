@@ -14,5 +14,6 @@ void utils_crypto_setup();
 void utils_crypto_loop();
 void utils_crypto_public_key(const uint8_t *privateKey, uint8_t *publicKey);
 void utils_crypto_keccak(const uint8_t *data, size_t len, uint8_t *hash);
+bool utils_crypto_sign(const uint8_t *hash32, const uint8_t *privateKey, uint8_t *sig64);
 
 #endif // UTILS_CRYPTO_H
