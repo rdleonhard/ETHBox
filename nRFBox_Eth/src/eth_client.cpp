@@ -6,10 +6,22 @@
 #include "eth_client.h"
 
 void eth_client_setup() {
-    // TODO: initialize eth_client
+    // nothing to init
 }
 
 void eth_client_loop() {
-    // TODO: implement eth_client runtime logic
+    // nothing for now
+}
+
+void eth_client_parseBalance(const char *json) {
+    DynamicJsonDocument doc(256);
+    DeserializationError err = deserializeJson(doc, json);
+    if (err) {
+        Serial.println("JSON parse failed");
+        return;
+    }
+    const char *result = doc["result"];
+    Serial.print("Balance: ");
+    Serial.println(result ? result : "null");
 }
 
