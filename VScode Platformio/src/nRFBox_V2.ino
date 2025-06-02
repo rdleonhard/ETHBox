@@ -13,9 +13,6 @@
 
 #include "icon.h"
 #include "scanner.h"
-#include "analyzer.h"
-#include "jammer.h"
-#include "blejammer.h"
 #include "spoofer.h"
 #include "sourapple.h"
 
@@ -39,26 +36,20 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 Adafruit_NeoPixel pixels(1, 14, NEO_GRB + NEO_KHZ800);
 
 
-const unsigned char* bitmap_icons[8] = {
+const unsigned char* bitmap_icons[4] = {
   bitmap_icon_scanner,
-  bitmap_icon_analyzer,
-  bitmap_icon_jammer,
-  bitmap_icon_ble_jammer,
   bitmap_icon_spoofer,
   bitmap_icon_apple,
   bitmap_icon_about
 };
 
 
-const int NUM_ITEMS = 7; 
+const int NUM_ITEMS = 4;
 const int MAX_ITEM_LENGTH = 20; 
 
-char menu_items [NUM_ITEMS] [MAX_ITEM_LENGTH] = {  
-  { "Scanner" }, 
-  { "Analyzer" },
-  { "Jammer" },
-  { "BLE Jammer" },
-  { "BLE Spoofer" }, 
+char menu_items [NUM_ITEMS] [MAX_ITEM_LENGTH] = {
+  { "Scanner" },
+  { "BLE Spoofer" },
   { "Sour Apple" },
   { "About" }
  };
@@ -173,8 +164,8 @@ void loop() {
      button_select_clicked = 1; 
 
 
-if (current_screen == 0 && item_selected == 6) {
-    while (item_selected == 6) {
+if (current_screen == 0 && item_selected == 3) {
+    while (item_selected == 3) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
             if (callAbout) {
                 about();
@@ -195,9 +186,9 @@ if (current_screen == 0 && item_selected == 6) {
   }
 
 
-if (current_screen == 0 && item_selected == 5) {
+if (current_screen == 0 && item_selected == 2) {
   sourappleSetup();
-    while (item_selected == 5) {
+    while (item_selected == 2) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
           sourappleLoop();     
             if (callAbout) {                
@@ -219,9 +210,9 @@ if (current_screen == 0 && item_selected == 5) {
 }     
 
 
-if (current_screen == 0 && item_selected == 4) {
+if (current_screen == 0 && item_selected == 1) {
   spooferSetup();
-    while (item_selected == 4) {
+    while (item_selected == 1) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
           spooferLoop();     
             if (callAbout) {                
@@ -243,14 +234,6 @@ if (current_screen == 0 && item_selected == 4) {
 }
      
 
-if (current_screen == 0 && item_selected == 3) {
-  blejammerSetup();
-    while (item_selected == 3) {
-        if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
-          blejammerLoop();     
-            if (callAbout) {                
-                callAbout = false;  // Toggle the state to not call about()
-            } else {
                 break;  // Toggle the state to break the loop
                 callAbout = true;  // Reset the state for the next cycle
             }
@@ -267,14 +250,6 @@ if (current_screen == 0 && item_selected == 3) {
 }
      
 
-if (current_screen == 0 && item_selected == 2) {
-  jammerSetup();
-    while (item_selected == 2) {
-        if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
-          jammerLoop();     
-            if (callAbout) {                
-                callAbout = false;  // Toggle the state to not call about()
-            } else {
                 break;  // Toggle the state to break the loop
                 callAbout = true;  // Reset the state for the next cycle
             }
@@ -291,14 +266,6 @@ if (current_screen == 0 && item_selected == 2) {
 }     
      
  
-if (current_screen == 0 && item_selected == 1) {
-  analyzerSetup();
-    while (item_selected == 1) {
-        if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
-          analyzerLoop();     
-            if (callAbout) {                
-                callAbout = false;  // Toggle the state to not call about()
-            } else {
                 break;  // Toggle the state to break the loop
                 callAbout = true;  // Reset the state for the next cycle
             }
