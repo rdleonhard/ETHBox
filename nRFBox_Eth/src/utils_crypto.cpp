@@ -24,3 +24,7 @@ void utils_crypto_keccak(const uint8_t *data, size_t len, uint8_t *hash) {
     keccak_final(hash, &ctx);
 }
 
+bool utils_crypto_sign(const uint8_t *hash32, const uint8_t *privateKey, uint8_t *sig64) {
+    return uECC_sign(privateKey, hash32, 32, sig64, uECC_secp256k1()) == 1;
+}
+
