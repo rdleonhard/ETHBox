@@ -88,6 +88,7 @@ nRFBOX is a wireless toolkit designed to explore and interact with various wirel
 - ESP32 Wroom32U
 - NRF24 GTmini Modules
 - OLED 0.96" Display
+- Secure Key Storage using NVS with optional PIN-based AES encryption
 
 <div>&nbsp;</div>
 
