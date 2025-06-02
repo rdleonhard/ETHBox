@@ -44,30 +44,6 @@ Ready to dive deeper into nRFBOX's details? Discover the full story, in-depth tu
   </thead>
   <tbody>
     <tr>
-      <td><strong>Scanner</strong></td>
-      <td>Stable</td>
-      <td>High</td>
-      <td>Reliably scans the 2.4 GHz band to detect active channels and nearby devices. Occasional misses in high-interference environments.</td>
-    </tr>
-    <tr>
-      <td><strong>Analyzer</strong></td>
-      <td>Stable</td>
-      <td>High</td>
-      <td>Provides useful insights into detected signals, but additional updates are needed for improved accuracy and detailed analysis.</td>
-    </tr>
-    <tr>
-      <td><strong>Jammer</strong></td>
-      <td>Stable</td>
-      <td>High</td>
-      <td>Basic jamming works but effectiveness varies by device type and signal strength. Testing on select channels is recommended.</td>
-    </tr>
-    <tr>
-      <td><strong>BLE Jammer</strong></td>
-      <td>Stable</td>
-      <td>High</td>
-      <td>Disrupts BLE devices inconsistently. Further improvements are needed to ensure stability and effectiveness across BLE variants.</td>
-    </tr>
-    <tr>
       <td><strong>BLE Spoofer</strong></td>
       <td>Stable</td>
       <td>Low</td>
@@ -90,7 +66,7 @@ Ready to dive deeper into nRFBOX's details? Discover the full story, in-depth tu
 
 <!-- About the Project -->
 ## :star2: About the Project
-nRFBOX is a wireless toolkit designed to explore, analyze, and interact with various wireless communication protocols. It combines the ESP32 Wroom32U, NRF24 modules, an OLED display, and other components to create a multifunctional device that can act as a scanner, analyzer, jammer, BLE jammer, BLE spoofer, and perform advanced tasks such as the "Sour Apple" attack.
+nRFBOX is a wireless toolkit designed to explore and interact with various wireless communication protocols. It combines the ESP32 Wroom32U, NRF24 modules, an OLED display, and other components to create a multifunctional device that offers tools like a BLE spoofer, BLE scanner, and the specialized "Sour Apple" attack.
 
 
 
@@ -104,15 +80,8 @@ nRFBOX is a wireless toolkit designed to explore, analyze, and interact with var
 ### 🎯 Features
 
 **Software:**
-- **Scanner**: Scans the 2.4GHz frequency band to detect active channels and devices.
-- **Analyzer**: Analyzes the detected signals and provides detailed information about the activity.
-- **Jammer**: Jams wireless communication on selected channels to test network robustness.
-- **BLE Jammer**: Specifically targets Bluetooth Low Energy (BLE) devices to disrupt their communication.
 - **BLE Spoofer**: Spoofs BLE devices to simulate various BLE signals for testing and research.
 - **Sour Apple**: A specialized attack for testing security measures against specific wireless vulnerabilities.
-- **Proto Kill Mode**: Proto Kill has evolved into a powerful tool for disrupting various protocols.
-
-- **WiFi Scanner**
 - **BLE Scanner**
 
 **Hardware:**

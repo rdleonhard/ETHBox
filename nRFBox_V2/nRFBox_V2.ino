@@ -17,25 +17,11 @@
 #include "neopixel.h"
 #include "setting.h"
 
-#include "scanner.h"
 #include "spoofer.h"
 #include "sourapple.h"
 #include "blescan.h"
-#include "blackout.h"
 
 
-#define CE_PIN_A  5
-#define CSN_PIN_A 17
-
-#define CE_PIN_B  16
-#define CSN_PIN_B 4
-
-#define CE_PIN_C  15
-#define CSN_PIN_C 2
-
-RF24 RadioA(CE_PIN_A, CSN_PIN_A);
-RF24 RadioB(CE_PIN_B, CSN_PIN_B);
-RF24 RadioC(CE_PIN_C, CSN_PIN_C);
 
 //U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0); // [full framebuffer, size = 1024 bytes]
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
@@ -45,9 +31,7 @@ Adafruit_NeoPixel pixels(1, 14, NEO_GRB + NEO_KHZ800);
 extern uint8_t oledBrightness;
 
 
-const unsigned char* bitmap_icons[7] = {
-  bitmap_icon_scanner,
-  bitmap_icon_kill,
+const unsigned char* bitmap_icons[5] = {
   bitmap_icon_spoofer,
   bitmap_icon_apple,
   bitmap_icon_ble,
@@ -56,12 +40,10 @@ const unsigned char* bitmap_icons[7] = {
 };
 
 
-const int NUM_ITEMS = 7;
+const int NUM_ITEMS = 5;
 const int MAX_ITEM_LENGTH = 20; 
 
 char menu_items [NUM_ITEMS] [MAX_ITEM_LENGTH] = {
-  { "Scanner" },
-  { "Proto Kill" },
   { "BLE Spoofer" },
   { "Sour Apple" },
   { "BLE Scan" },
@@ -96,24 +78,9 @@ void about() {
   u8g2.sendBuffer();
 }
 
-void configureNrf(RF24 &radio) {
-  radio.begin();
-  radio.setAutoAck(false);
-  radio.stopListening();
-  radio.setRetries(0, 0);
-  radio.setPALevel(RF24_PA_MAX, true);
-  radio.setDataRate(RF24_2MBPS);
-  radio.setCRCLength(RF24_CRC_DISABLED);
-}
-
-
 void setup() {
 
   neopixelSetup();
-
-  configureNrf(RadioA);
-  configureNrf(RadioB);
-  configureNrf(RadioC);
 
   EEPROM.begin(512); 
   oledBrightness = EEPROM.read(1);
@@ -191,9 +158,9 @@ void loop() {
 
   if ((digitalRead(BUTTON_SELECT_PIN) == LOW) && (button_select_clicked == 0)) { 
      button_select_clicked = 1; 
-  if (current_screen == 0 && item_selected == 6) {
+  if (current_screen == 0 && item_selected == 4) {
     settingSetup();
-      while (item_selected == 6) {
+      while (item_selected == 4) {
           if (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
               if (callAbout) {
                   settingLoop();
@@ -214,8 +181,8 @@ void loop() {
 
 
 
-if (current_screen == 0 && item_selected == 5) {
-    while (item_selected == 5) {
+if (current_screen == 0 && item_selected == 3) {
+    while (item_selected == 3) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
             if (callAbout) {
                 about();
@@ -252,9 +219,9 @@ if (current_screen == 0 && item_selected == 5) {
 }
 
 
-if (current_screen == 0 && item_selected == 4) {
+if (current_screen == 0 && item_selected == 2) {
   blescanSetup();
-    while (item_selected == 4) {
+    while (item_selected == 2) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
           blescanLoop();     
             if (callAbout) {                
@@ -276,9 +243,9 @@ if (current_screen == 0 && item_selected == 4) {
 }
 
 
-if (current_screen == 0 && item_selected == 3) {
+if (current_screen == 0 && item_selected == 1) {
   sourappleSetup();
-    while (item_selected == 3) {
+    while (item_selected == 1) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
           sourappleLoop();     
             if (callAbout) {                
@@ -300,9 +267,9 @@ if (current_screen == 0 && item_selected == 3) {
 }     
 
 
-if (current_screen == 0 && item_selected == 2) {
+if (current_screen == 0 && item_selected == 0) {
   spooferSetup();
-    while (item_selected == 2) {
+    while (item_selected == 0) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
           spooferLoop();     
             if (callAbout) {                
@@ -324,99 +291,6 @@ if (current_screen == 0 && item_selected == 2) {
 }
      
 
-                break;  // Toggle the state to break the loop
-                callAbout = true;  // Reset the state for the next cycle
-            }
-
-            while (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
-                // Wait for the button to be released
-                
-                if (callAbout = true){
-                  break;
-                }
-            }
-        }
-    }
-}
-
-
-if (current_screen == 0 && item_selected == 1) {
-  blackoutSetup();
-    while (item_selected == 1) {
-        if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
-          blackoutLoop();     
-            if (callAbout) {                
-                callAbout = false;  // Toggle the state to not call about()
-            } else {
-                break;  // Toggle the state to break the loop
-                callAbout = true;  // Reset the state for the next cycle
-            }
-
-            while (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
-                // Wait for the button to be released
-                
-                if (callAbout = true){
-                  break;
-                }
-            }
-        }
-    }
-}
-     
-
-                break;  // Toggle the state to break the loop
-                callAbout = true;  // Reset the state for the next cycle
-            }
-
-            while (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
-                // Wait for the button to be released
-                
-                if (callAbout = true){
-                  break;
-                }
-            }
-        }
-    }
-}     
-     
- 
-                break;  // Toggle the state to break the loop
-                callAbout = true;  // Reset the state for the next cycle
-            }
-
-            while (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
-                // Wait for the button to be released
-                
-                if (callAbout = true){
-                  break;
-                }
-            }
-        }
-    }
-}    
-   
-
-if (current_screen == 0 && item_selected == 0) {
-  scannerSetup();
-    while (item_selected == 0) {
-        if (digitalRead(BUTTON_SELECT_PIN) == HIGH) {       
-            if (callAbout) {
-                scannerLoop();   
-                callAbout = false;  // Toggle the state to not call about()
-            } else {
-                break;  // Toggle the state to break the loop
-                callAbout = true;  // Reset the state for the next cycle
-            }
-
-            while (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
-                // Wait for the button to be released
-                if (callAbout = true){
-                  break;
-                }
-            }
-        }
-    }
- }  
 
 }  
 
