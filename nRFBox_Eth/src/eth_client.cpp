@@ -25,3 +25,41 @@ void eth_client_parseBalance(const char *json) {
     Serial.println(result ? result : "null");
 }
 
+String eth_client_wrapGetBalance(const String &address) {
+    DynamicJsonDocument doc(128);
+    doc["jsonrpc"] = "2.0";
+    doc["method"] = "eth_getBalance";
+    JsonArray params = doc.createNestedArray("params");
+    params.add(address);
+    params.add("latest");
+    doc["id"] = 1;
+    String out;
+    serializeJson(doc, out);
+    return out;
+}
+
+String eth_client_wrapSendRawTransaction(const String &rawTx) {
+    DynamicJsonDocument doc(128);
+    doc["jsonrpc"] = "2.0";
+    doc["method"] = "eth_sendRawTransaction";
+    JsonArray params = doc.createNestedArray("params");
+    params.add(rawTx);
+    doc["id"] = 1;
+    String out;
+    serializeJson(doc, out);
+    return out;
+}
+
+String eth_client_wrapGetTransactionCount(const String &address) {
+    DynamicJsonDocument doc(128);
+    doc["jsonrpc"] = "2.0";
+    doc["method"] = "eth_getTransactionCount";
+    JsonArray params = doc.createNestedArray("params");
+    params.add(address);
+    params.add("latest");
+    doc["id"] = 1;
+    String out;
+    serializeJson(doc, out);
+    return out;
+}
+
