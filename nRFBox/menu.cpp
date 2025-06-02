@@ -33,9 +33,7 @@ void menuSetup() {
     display.display();
     delay(3000);
 
-    if (entered == -1)  scannerSetup();      
-    if (entered == 1)   jammerSetup();
-    if (entered == 2)   AnalyzerSetup();
+    if (entered == -1)  scannerSetup();
 }
 
 
@@ -47,15 +45,7 @@ void displaymenu(void) {
   int back  = digitalRead(6);
   
 
-    if (up == LOW){
-    selected = selected + 1;
-    if (selected > 2)
-    selected = 2;
-    delay(200);
-  };
-    if (down == LOW){
-    selected = selected - 1;
-    if (selected < 0)
+    if (up == LOW || down == LOW){
     selected = 0;
     delay(200);
   };
@@ -70,10 +60,8 @@ void displaymenu(void) {
   };
 
  
-  const char *options[4] = {
-    " Rf Scanner ",
-    " 2.4 jammer ",
-    " Analyzer "
+  const char *options[1] = {
+    " Rf Scanner "
   };
 
 
@@ -104,13 +92,6 @@ void displaymenu(void) {
       scannerLoop();
       break;
 
-    case 1: 
-      jammerLoop();
-      break;
-
-    case 2: 
-      AnalyzerLoop();
-      break;
 
     default:
       break;

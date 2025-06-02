@@ -7,8 +7,6 @@
 #define menu_H
 
 #include "scanner.h"
-#include "jammer.h"
-#include "Analyzer.h"
 
 #include <SPI.h>
 #include <Wire.h>

@@ -18,13 +18,9 @@
 #include "setting.h"
 
 #include "scanner.h"
-#include "analyzer.h"
-#include "jammer.h"
-#include "blejammer.h"
 #include "spoofer.h"
 #include "sourapple.h"
 #include "blescan.h"
-#include "wifiscan.h"
 #include "blackout.h"
 
 
@@ -49,34 +45,26 @@ Adafruit_NeoPixel pixels(1, 14, NEO_GRB + NEO_KHZ800);
 extern uint8_t oledBrightness;
 
 
-const unsigned char* bitmap_icons[11] = {
+const unsigned char* bitmap_icons[7] = {
   bitmap_icon_scanner,
-  bitmap_icon_analyzer,
-  bitmap_icon_jammer,
   bitmap_icon_kill,
-  bitmap_icon_ble_jammer,
   bitmap_icon_spoofer,
   bitmap_icon_apple,
   bitmap_icon_ble,
-  bitmap_icon_wifi,
   bitmap_icon_about,
   bitmap_icon_setting
 };
 
 
-const int NUM_ITEMS = 11; 
+const int NUM_ITEMS = 7;
 const int MAX_ITEM_LENGTH = 20; 
 
-char menu_items [NUM_ITEMS] [MAX_ITEM_LENGTH] = {  
-  { "Scanner" }, 
-  { "Analyzer" },
-  { "WLAN Jammer" },
+char menu_items [NUM_ITEMS] [MAX_ITEM_LENGTH] = {
+  { "Scanner" },
   { "Proto Kill" },
-  { "BLE Jammer" },
-  { "BLE Spoofer" }, 
+  { "BLE Spoofer" },
   { "Sour Apple" },
   { "BLE Scan" },
-  { "WiFi Scan" },
   { "About" },
   { "Setting" }
  };
@@ -203,33 +191,31 @@ void loop() {
 
   if ((digitalRead(BUTTON_SELECT_PIN) == LOW) && (button_select_clicked == 0)) { 
      button_select_clicked = 1; 
-
-
-if (current_screen == 0 && item_selected == 10) {
-  settingSetup();
-    while (item_selected == 10) {
-        if (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
-            if (callAbout) {
-                settingLoop();
-                callAbout = false;  // Toggle the state to not call about()
-            } else {
-                break;  // Toggle the state to break the loop
-                callAbout = true;  // Reset the state for the next cycle
-            }
-
-            while (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
-                // Wait for the button to be released
-                if (callAbout = true){
+  if (current_screen == 0 && item_selected == 6) {
+    settingSetup();
+      while (item_selected == 6) {
+          if (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
+              if (callAbout) {
+                  settingLoop();
+                  callAbout = false;
+              } else {
                   break;
-                }
-            }
-        }
+                  callAbout = true;
+              }
+
+              while (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
+                  if (callAbout = true){
+                    break;
+                  }
+              }
+          }
+      }
     }
-  }     
 
 
-if (current_screen == 0 && item_selected == 9) {
-    while (item_selected == 9) {
+
+if (current_screen == 0 && item_selected == 5) {
+    while (item_selected == 5) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) {
             if (callAbout) {
                 about();
@@ -250,14 +236,6 @@ if (current_screen == 0 && item_selected == 9) {
   }
 
 
-if (current_screen == 0 && item_selected == 8) {
-  wifiscanSetup();
-    while (item_selected == 8) {
-        if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
-         wifiscanLoop();     
-            if (callAbout) {                             
-                callAbout = false;  // Toggle the state to not call about()
-            } else {
                 break;  // Toggle the state to break the loop
                 callAbout = true;  // Reset the state for the next cycle
             }
@@ -274,9 +252,9 @@ if (current_screen == 0 && item_selected == 8) {
 }
 
 
-if (current_screen == 0 && item_selected == 7) {
+if (current_screen == 0 && item_selected == 4) {
   blescanSetup();
-    while (item_selected == 7) {
+    while (item_selected == 4) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
           blescanLoop();     
             if (callAbout) {                
@@ -298,9 +276,9 @@ if (current_screen == 0 && item_selected == 7) {
 }
 
 
-if (current_screen == 0 && item_selected == 6) {
+if (current_screen == 0 && item_selected == 3) {
   sourappleSetup();
-    while (item_selected == 6) {
+    while (item_selected == 3) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
           sourappleLoop();     
             if (callAbout) {                
@@ -322,9 +300,9 @@ if (current_screen == 0 && item_selected == 6) {
 }     
 
 
-if (current_screen == 0 && item_selected == 5) {
+if (current_screen == 0 && item_selected == 2) {
   spooferSetup();
-    while (item_selected == 5) {
+    while (item_selected == 2) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
           spooferLoop();     
             if (callAbout) {                
@@ -346,14 +324,6 @@ if (current_screen == 0 && item_selected == 5) {
 }
      
 
-if (current_screen == 0 && item_selected == 4) {
-  blejammerSetup();
-    while (item_selected == 4) {
-        if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
-          blejammerLoop();     
-            if (callAbout) {                
-                callAbout = false;  // Toggle the state to not call about()
-            } else {
                 break;  // Toggle the state to break the loop
                 callAbout = true;  // Reset the state for the next cycle
             }
@@ -370,9 +340,9 @@ if (current_screen == 0 && item_selected == 4) {
 }
 
 
-if (current_screen == 0 && item_selected == 3) {
+if (current_screen == 0 && item_selected == 1) {
   blackoutSetup();
-    while (item_selected == 3) {
+    while (item_selected == 1) {
         if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
           blackoutLoop();     
             if (callAbout) {                
@@ -394,14 +364,6 @@ if (current_screen == 0 && item_selected == 3) {
 }
      
 
-if (current_screen == 0 && item_selected == 2) {
-  jammerSetup();
-    while (item_selected == 2) {
-        if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
-          jammerLoop();     
-            if (callAbout) {                
-                callAbout = false;  // Toggle the state to not call about()
-            } else {
                 break;  // Toggle the state to break the loop
                 callAbout = true;  // Reset the state for the next cycle
             }
@@ -418,14 +380,6 @@ if (current_screen == 0 && item_selected == 2) {
 }     
      
  
-if (current_screen == 0 && item_selected == 1) {
-  analyzerSetup();
-    while (item_selected == 1) {
-        if (digitalRead(BUTTON_SELECT_PIN) == HIGH) { 
-          analyzerLoop();     
-            if (callAbout) {                
-                callAbout = false;  // Toggle the state to not call about()
-            } else {
                 break;  // Toggle the state to break the loop
                 callAbout = true;  // Reset the state for the next cycle
             }
