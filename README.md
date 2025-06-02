@@ -174,7 +174,11 @@ Project Link: [https://github.com/cifertech/nRFBOX](https://github.com/cifertech
  - [nRF24L01-WiFi-Jammer](https://github.com/hugorezende/nRF24L01-WiFi-Jammer)
  - [Universal-RC-system](https://github.com/alexbeliaev/Universal-RC-system/tree/master)
  - [AppleJuice](https://github.com/ECTO-1A/AppleJuice)
- - [ESP32-Sour-Apple](https://github.com/RapierXbox/ESP32-Sour-Apple)
+- [ESP32-Sour-Apple](https://github.com/RapierXbox/ESP32-Sour-Apple)
+- [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
+- [micro-ecc](https://github.com/kmackay/micro-ecc)
+- [TinySHA3](https://github.com/techninethrop/TinySHA3)
+- [ESP32 Preferences](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/preferences.html)
 
 **Community Contributors**: Thanks to everyone who helped improve nRFBox! Your support is much appreciated!
 

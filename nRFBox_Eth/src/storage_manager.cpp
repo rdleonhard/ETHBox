@@ -5,11 +5,21 @@
 
 #include "storage_manager.h"
 
+Preferences prefs;
+
 void storage_manager_setup() {
-    // TODO: initialize storage_manager
+    prefs.begin("nrfbox", false);
+}
+
+void storage_manager_saveCounter(uint32_t counter) {
+    prefs.putUInt("counter", counter);
+}
+
+uint32_t storage_manager_loadCounter() {
+    return prefs.getUInt("counter", 0);
 }
 
 void storage_manager_loop() {
-    // TODO: implement storage_manager runtime logic
+    // nothing for now
 }
 
